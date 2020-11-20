@@ -10,25 +10,21 @@ def calculate_demographic_data(print_data=True):
     
 
     # What is the average age of men?
-    average_age_men = None
-    men_age = 0
-    man_count = 0
-    for i in df:
-      person = df[['sex', 'age']]
-      if person.iloc['sex'] == 'Male':
-        men_age += person.iloc['age']
-    average_age_men = men_age/man_count
+  
+  
+
+    average_age_men = df.loc[df['sex'] == 'Male']['age'].mean()
         
     
 
     # What is the percentage of people who have a Bachelor's degree?
-    percentage_bachelors = None
+    percentage_bachelors = df['education'].value_counts(normalize=True)['Bachelors'] * 100
 
     # What percentage of people with advanced education (`Bachelors`, `Masters`, or `Doctorate`) make more than 50K?
     # What percentage of people without advanced education make more than 50K?
 
     # with and without `Bachelors`, `Masters`, or `Doctorate`
-    higher_education = None
+    higher_education = df.loc[df['education'].isin(['Bachelors','Masters', 'Doctorate'])]
     lower_education = None
 
     # percentage with salary >50K
